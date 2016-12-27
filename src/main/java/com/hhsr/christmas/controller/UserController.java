@@ -35,6 +35,7 @@ public class UserController {
             log.info("查询结果,user={}", user);
         }
         result.addObject("user", user);
+        String abc = "abc";
         return "hello world";
     }
 
@@ -44,6 +45,7 @@ public class UserController {
         log.info("进入index,user={}", index);
         return "hello world";
     }
+
 
 
 }
