@@ -36,7 +36,7 @@ public class UserController {
         }
         result.addObject("user", user);
         String abc = "abc";
-        //result.addObject("user", user);
+        result.addObject("user", user);
         return "hello world";
     }
 
