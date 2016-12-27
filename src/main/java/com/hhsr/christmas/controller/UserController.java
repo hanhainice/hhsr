@@ -44,6 +44,7 @@ public class UserController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     String index(Integer index) {
         log.info("进入index,user={}", index);
+        String str = "str123";
         return "hello world";
     }
 
