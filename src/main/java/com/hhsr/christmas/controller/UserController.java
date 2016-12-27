@@ -34,7 +34,7 @@ public class UserController {
             user = userService.selectByKey(user.getId());
             log.info("查询结果,user={}", user);
         }
-        result.addObject("user", user);
+        //result.addObject("user", user);
         return "hello world";
     }
 
