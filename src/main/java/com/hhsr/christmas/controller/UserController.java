@@ -2,14 +2,20 @@ package com.hhsr.christmas.controller;
 
 import com.hhsr.christmas.entity.CrsUser;
 import com.hhsr.christmas.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -48,6 +54,26 @@ public class UserController {
         return "hello world";
     }
 
+    @ApiOperation(value = "保存用户信息", notes = "保存用户信息", response = Object.class, position = 2)
+    @ResponseBody
+    @RequestMapping(value = "/save/{peopleNum}", method = RequestMethod.GET)
+    Object save(@PathVariable String peopleNum) {
+        log.info("进入save,peopleNum={}", peopleNum);
 
+        Map<String, String> resultMap = new HashMap();
+
+        CrsUser user = new CrsUser();
+        user.setCreateTime(new Date());
+        user.setPeopleNum(peopleNum);
+        try{
+            userService.save(user);
+        }catch (Exception e){
+            log.error("保存用户异常,peopleNum={}, e={}", peopleNum, e);
+            resultMap.put("9999", "保存失败");
+            return resultMap;
+        }
+        resultMap.put("1000", "保存成功");
+        return resultMap;
+    }
 
 }
