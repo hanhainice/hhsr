@@ -10,7 +10,7 @@
 </head>
 <body>
 
-欢迎${user.username}登录
+欢迎${user.userName}登录
 
 <a href="/logout"><button>退出登录</button></a>
 

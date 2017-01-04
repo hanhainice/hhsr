@@ -11,9 +11,6 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
   <mvc:default-servlet-handler/>
 
-  <!-- 导入shiro的相关配置 -->
-  <import resource="classpath:application-shiro.xml" />
-
   <!--RequestMappingHandlerAdapter-->
   <mvc:annotation-driven>
     <mvc:message-converters>
@@ -22,6 +19,9 @@
       <ref bean="mappingJackson2HttpMessageConverter"/>
     </mvc:message-converters>
   </mvc:annotation-driven>
+
+  <!-- 这样静态资源就可以访问了-->
+  <mvc:default-servlet-handler />
 
   <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
   <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
@@ -112,8 +112,8 @@
         depends-on="lifecycleBeanPostProcessor">
     <property name="proxyTargetClass" value="true" />
   </bean>
-  <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+  <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
     <property name="securityManager" ref="securityManager"/>
-  </bean>-->
+  </bean>
 
 </beans>

@@ -28,8 +28,14 @@ public class LoginController {
 
     @RequestMapping(value="login",method=RequestMethod.GET)
     public String login(){
-        log.info("======用户进入Controller的/login.html");
+        log.info("======用户进入Controller的/login");
         return "login";
+    }
+
+    @RequestMapping(value="home",method=RequestMethod.GET)
+    public String home(){
+        log.info("======用户进入Controller的/home");
+        return "home";
     }
 
     @RequestMapping(value = "/logout")
@@ -39,12 +45,12 @@ public class LoginController {
         return "redirect:login";
     }
 
-    @RequestMapping(value="/doLogin.html",method=RequestMethod.POST)
+    @RequestMapping(value="/doLogin",method=RequestMethod.POST)
     public String doLogin(SecUser user, HttpServletRequest request, Model model){
         log.info("======用户进入了LoginController的/doLogin");
         String msg ;
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
-        token.setRememberMe(true);
+        //token.setRememberMe(true);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
@@ -53,7 +59,7 @@ public class LoginController {
                 SavedRequest savedRequest = WebUtils.getSavedRequest(request);
                 // 获取保存的URL
                 if (savedRequest == null || savedRequest.getRequestUrl() == null) {
-                    return "admin/home";
+                    return "redirect:home";
                 } else {
                     return "forward:" + savedRequest.getRequestUrl();
                 }
@@ -91,6 +97,4 @@ public class LoginController {
         }
         return "login";
     }
-
-
 }

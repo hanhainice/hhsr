@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 public class AdminController {
 
-    // 登录成功的页面
-    @RequestMapping(value = "/admin/home")
-    public String adminHomePage(){
-        return "admin/home";
-    }
-
     // 只有角色为admin的才能访问
     @RequiresRoles("admin")
     @RequestMapping(value = "/admin/role")

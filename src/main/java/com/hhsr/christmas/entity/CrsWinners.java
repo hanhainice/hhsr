@@ -10,7 +10,7 @@ public class CrsWinners {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     /**
      * 中奖手机号码
@@ -31,7 +31,7 @@ public class CrsWinners {
      *
      * @return id - 中奖者ID
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -40,7 +40,7 @@ public class CrsWinners {
      *
      * @param id 中奖者ID
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

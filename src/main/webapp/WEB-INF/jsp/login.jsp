@@ -12,7 +12,7 @@
 <h1>login page</h1>
 <form action="/doLogin"  method="POST">
     <label>User Name</label>
-    <input tyep="text" name="username" maxLength="40"/>
+    <input tyep="text" name="userName" maxLength="40"/>
     <label>Password</label>
     <input type="password" name="password"/>
     <input type="submit" value="login"/>

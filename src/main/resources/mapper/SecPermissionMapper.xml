@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hhsr.christmas.mapper.SecPermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.hhsr.christmas.entity.SecPermission" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhsr.christmas.mapper.SecPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.hhsr.christmas.entity.SecPermission">
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
-    <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
-    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
+    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
 </mapper>

@@ -22,17 +22,13 @@
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.user}"/>
         <property name="password" value="${jdbc.password}"/>
-
         <property name="filters" value="stat"/>
-
         <property name="maxActive" value="20"/>
         <property name="initialSize" value="1"/>
         <property name="maxWait" value="60000"/>
         <property name="minIdle" value="1"/>
-
         <property name="timeBetweenEvictionRunsMillis" value="60000"/>
         <property name="minEvictableIdleTimeMillis" value="300000"/>
-
         <property name="validationQuery" value="SELECT 'x'"/>
         <property name="testWhileIdle" value="true"/>
         <property name="testOnBorrow" value="false"/>
@@ -58,14 +54,13 @@
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.hhsr.christmas.mapper"/>
         <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
-        <property name="markerInterface" value="com.hhsr.christmas.util.MyMapper"/>
-        <!-- 通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口
-        <property name="properties">
+        <property name="markerInterface" value="com.hhsr.christmas.mapper.base.MyMapper"/>
+         <!--通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口-->
+        <!--<property name="properties">
             <value>
                 mappers=tk.mybatis.mapper.common.Mapper
             </value>
-        </property>
-        -->
+        </property>-->
     </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
@@ -91,4 +86,47 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- Shiro的核心安全接口，这个属性是必须的 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 要求登录时的链接(登录页面地址)，非必须的属性，默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
+        <property name="loginUrl" value="/login.html" />
+        <!-- 登录成功后要跳转的连接(本例中此属性用不到，因为登录成功后的处理逻辑在LoginController里硬编码) -->
+        <!-- <property name="successUrl" value="/" ></property> -->
+        <!-- 用户访问未对其授权的资源时，所显示的连接 -->
+        <property name="unauthorizedUrl" value="/admin/deny/" />
+
+        <property name="filterChainDefinitions">
+            <value>
+                /admin/** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+    <!-- 数据库保存的密码是使用MD5算法加密的，所以这里需要配置一个密码匹配对象 -->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.Md5CredentialsMatcher"></bean>
+
+    <!--使用Shiro自带的JdbcRealm类
+    指定密码匹配所需要用到的加密对象
+    指定存储用户、角色、权限许可的数据源及相关查询语句-->
+    <bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"></property>
+        <property name="permissionsLookupEnabled" value="true"></property>
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="authenticationQuery"
+                  value="SELECT password FROM sec_user WHERE user_name = ?"></property>
+        <property name="userRolesQuery"
+                  value="SELECT role_name from sec_user_role left join sec_role using(role_id) left join sec_user using(user_id) WHERE user_name = ?"></property>
+        <property name="permissionsQuery"
+                  value="SELECT permission_name FROM sec_role_permission left join sec_role using(role_id) left join sec_permission using(permission_id) WHERE role_name = ?"></property>
+    </bean>
+
+    <!-- Shiro安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="jdbcRealm"></property>
+    </bean>
+
 </beans>
