@@ -1,7 +1,7 @@
 package com.hhsr.christmas.mapper;
 
 import com.hhsr.christmas.entity.CrsWinners;
-import com.hhsr.christmas.util.MyMapper;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface CrsWinnersMapper extends MyMapper<CrsWinners> {
+public interface CrsWinnersMapper extends Mapper<CrsWinners> {
 }

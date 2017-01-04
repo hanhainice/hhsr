@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
  * @since 2015-09-19 17:17
  */
 @Service("userService")
-public class CrsUserServiceImpl extends BaseService<CrsUser> implements UserService {
+public class UserServiceImpl extends BaseService<CrsUser> implements UserService {
 
     @Override
     public CrsUser selectByUser(CrsUser user) {
-        return selectByKey(user.getId());
+        return mapper.selectByPrimaryKey(user.getId());
     }
 
 }

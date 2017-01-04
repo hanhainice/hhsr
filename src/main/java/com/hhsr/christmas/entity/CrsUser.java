@@ -4,13 +4,13 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "crs_user")
-public class CrsUser extends BaseEntity {
+public class CrsUser {
     /**
      * 用户id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     /**
      * 游戏分数
@@ -52,7 +52,7 @@ public class CrsUser extends BaseEntity {
      *
      * @return id - 用户id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -61,7 +61,7 @@ public class CrsUser extends BaseEntity {
      *
      * @param id 用户id
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

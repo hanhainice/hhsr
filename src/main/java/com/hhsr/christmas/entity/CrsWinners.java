@@ -4,7 +4,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "crs_winners")
-public class CrsWinners extends BaseEntity {
+public class CrsWinners {
     /**
      * 中奖者ID
      */

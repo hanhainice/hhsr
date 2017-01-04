@@ -12,9 +12,9 @@ public interface UserService extends IService<CrsUser> {
     /**
      * 条件查询
      *
-     * @param crsUser
+     * @param user
      * @return
      */
-    CrsUser selectByUser(CrsUser crsUser);
+    CrsUser selectByUser(CrsUser user);
 
 }
