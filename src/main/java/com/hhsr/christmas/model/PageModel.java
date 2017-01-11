@@ -1,9 +1,11 @@
 package com.hhsr.christmas.model;
 
+import lombok.Data;
+
 /**
- * @author liuzh_3nofxnp
- * @since 2015-11-09 22:25
+ * 分页信息
  */
+@Data
 public class PageModel {
     private Integer pageNum;
     private Integer pageSize;
@@ -11,52 +13,4 @@ public class PageModel {
     private Boolean countSql;
     private Boolean pageSizeZero;
     private Boolean reasonable;
-
-    public Integer getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public String getOrderBy() {
-        return orderBy;
-    }
-
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
-    }
-
-    public Boolean getCountSql() {
-        return countSql;
-    }
-
-    public void setCountSql(Boolean countSql) {
-        this.countSql = countSql;
-    }
-
-    public Boolean getPageSizeZero() {
-        return pageSizeZero;
-    }
-
-    public void setPageSizeZero(Boolean pageSizeZero) {
-        this.pageSizeZero = pageSizeZero;
-    }
-
-    public Boolean getReasonable() {
-        return reasonable;
-    }
-
-    public void setReasonable(Boolean reasonable) {
-        this.reasonable = reasonable;
-    }
 }

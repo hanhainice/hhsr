@@ -1,9 +1,7 @@
 package com.hhsr.christmas.controller;
 
 import com.hhsr.christmas.entity.SecUser;
-import com.hhsr.christmas.service.UserService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -18,24 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author liuzh_3nofxnp
- * @since 2015-09-19 17:15
+ * 登录
  */
+@Slf4j
 @Controller
 public class LoginController {
 
-    private static Logger log = LogManager.getLogger(LoginController.class);
 
     @RequestMapping(value="login",method=RequestMethod.GET)
     public String login(){
         log.info("======用户进入Controller的/login");
         return "login";
-    }
-
-    @RequestMapping(value="home",method=RequestMethod.GET)
-    public String home(){
-        log.info("======用户进入Controller的/home");
-        return "home";
     }
 
     @RequestMapping(value = "/logout")

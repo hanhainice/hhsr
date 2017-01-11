@@ -9,13 +9,12 @@
     <title>hello</title>
 </head>
 <body>
-<h1>login page</h1>
 <form action="/doLogin"  method="POST">
     <label>User Name</label>
     <input tyep="text" name="userName" maxLength="40"/>
     <label>Password</label>
     <input type="password" name="password"/>
-    <input type="submit" value="login"/>
+    <input type="submit" value="登录"/>
 </form>
 <%--用于输入后台返回的验证错误信息 --%>
 <P>${message }</P>
